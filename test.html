@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+    <!-- <div ng-app="myApp" ng-controller="myCtrl">
+
+        First Name: <input type="text" ng-model="firstName"><br>
+        Last Name: <input type="text" ng-model="lastName"><br>
+        <br>
+        Full Name: {{firstName + " " + lastName}}
+        
+        </div> -->
+        <body ng-app="myApp">
+
+            <div ng-controller="myCtrl">
+                Message: <input type="text" ng-model="msg"><br>
+                <button ng-click="myFunc()">Send</button>
+                <p>{{nmsg}}</p>
+            </div>
+            
+            <script>
+            angular.module('myApp', [])
+            .controller('myCtrl', ['$scope', function($scope, $http) {
+                $scope.nmsg = "";
+                $scope.myFunc = function($scope,$http) {
+                    $http({
+                    method : "GET",
+                      url : "https://api.telegram.org/bot847005289:AAFZjuM8WweR5fkWd8fzfAR_qy_HJPrIUx0/sendMessage?chat_id=969149187&parse_mode=HTML&text="+$scope.msg
+                  }).then(function mySuccess(response) {
+                    $scope.nmsg = response.data;
+                  }, function myError(response) {
+                    $scope.nmsg = response.statusText;
+                  });
+                };
+            }]);
+            </script>
+            
+        <div ng-app="myApp" ng-controller="myCtrl">
+
+            <p>Today's welcome message is:</p>
+
+            <h1>{{myWelcome}}</h1>
+            
+            </div>
+            
+            <script>var app = angular.module('myApp', []);
+                app.controller('myCtrl', function($scope, $http) {
+                  
+                });
+            </script>
+</body>
+</html>
